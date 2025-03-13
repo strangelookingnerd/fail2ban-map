@@ -1,4 +1,4 @@
-"""Module for collecting locations as GeoJSON via IP."""
+#!/usr/bin/python3
 
 # MIT License
 #
@@ -46,10 +46,8 @@ def find_lat_lng(ipaddr: str) -> dict:
         geo_value = response.json()
 
         if "lon" in geo_value and "lat" in geo_value:
-            point["geometry"]["coordinates"] = \
-                [float(geo_value["lon"]), float(geo_value["lat"])]
-            point["properties"]["place"] = \
-                f"{geo_value.get('city', 'Unknown')}, {geo_value.get('country', 'Unknown')}"
+            point["geometry"]["coordinates"] = [float(geo_value["lon"]), float(geo_value["lat"])]
+            point["properties"]["place"] = f"{geo_value.get('city', 'Unknown')}, {geo_value.get('country', 'Unknown')}"
             point["properties"]["show_on_map"] = True
 
             if ADD_RANDOM_OFFSET:

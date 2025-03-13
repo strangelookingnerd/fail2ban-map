@@ -1,4 +1,4 @@
-"""Module for testing fail2ban_map.py."""
+#!/usr/bin/python3
 
 import unittest
 import json

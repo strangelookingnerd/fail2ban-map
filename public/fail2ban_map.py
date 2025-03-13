@@ -1,3 +1,5 @@
+"""Module for collecting locations as GeoJSON via IP."""
+
 # MIT License
 #
 # Copyright (c) 2025 strangelookingnerd
@@ -44,8 +46,10 @@ def find_lat_lng(ipaddr: str) -> dict:
         geo_value = response.json()
 
         if "lon" in geo_value and "lat" in geo_value:
-            point["geometry"]["coordinates"] = [float(geo_value["lon"]), float(geo_value["lat"])]
-            point["properties"]["place"] = f"{geo_value.get('city', 'Unknown')}, {geo_value.get('country', 'Unknown')}"
+            point["geometry"]["coordinates"] = \
+                [float(geo_value["lon"]), float(geo_value["lat"])]
+            point["properties"]["place"] = \
+                f"{geo_value.get('city', 'Unknown')}, {geo_value.get('country', 'Unknown')}"
             point["properties"]["show_on_map"] = True
 
             if ADD_RANDOM_OFFSET:
@@ -78,6 +82,7 @@ def add(ipaddr: str, json_file=JSON_FILE) -> None:
     try:
         with open(json_file, "w", encoding="utf-8") as file:
             json.dump(data, file, indent=2)
+    # pylint: disable=broad-exception-caught
     except Exception as ex:
         print(f"Error writing to {json_file}: {ex}", file=sys.stderr)
 

@@ -1,9 +1,13 @@
+"""Module for testing fail2ban_map.py."""
+
 import unittest
 import json
 import os
+# pylint: disable=import-error
 from public.fail2ban_map import find_lat_lng, add
 
 class Test(unittest.TestCase):
+    """Collection of tests for fail2ban_map."""
     def setUp(self):
         """Runs before each test."""
         self.test_ip = "8.8.8.8"  # Google's public DNS IP
@@ -31,7 +35,7 @@ class Test(unittest.TestCase):
 
     def test_add_function_real(self):
         """Test if add() correctly appends data to the GeoJSON file."""
-        add("8.8.8.8", json_file=self.temp_json_file)
+        add(self.test_ip, json_file=self.temp_json_file)
 
         self.assertTrue(os.path.exists(self.temp_json_file))
 

@@ -1,0 +1,62 @@
+{
+  "name": "fail2ban-map",
+  "version": "1.0.0",
+  "main": "public/fail2ban-map.js",
+  "scripts": {
+    "prettier-check": "npx prettier ./public --check",
+    "prettier-fix": "npx prettier ./public --write",
+    "preinstall": "rimraf public/vendor",
+    "postinstall": "vendor-copy"
+  },
+  "keywords": [],
+  "author": "strangelookingnerd",
+  "license": "MIT",
+  "type": "commonjs",
+  "description": "",
+  "dependencies": {
+    "heatmap.js": "2.0.5",
+    "jquery": "3.7.1",
+    "leaflet": "1.9.4",
+    "leaflet-heatmap": "1.0.0",
+    "leaflet-providers": "2.0.0"
+  },
+  "devDependencies": {
+    "prettier": "3.5.3",
+    "rimraf": "6.0.1",
+    "vendor-copy": "3.0.1"
+  },
+  "vendorCopy": [
+    {
+      "from": "node_modules/leaflet/dist/leaflet.js",
+      "to": "public/vendor/leaflet/leaflet.js"
+    },
+    {
+      "from": "node_modules/leaflet/dist/leaflet.js.map",
+      "to": "public/vendor/leaflet/leaflet.js.map"
+    },
+    {
+      "from": "node_modules/leaflet/dist/leaflet.css",
+      "to": "public/vendor/leaflet/leaflet.css"
+    },
+    {
+      "from": "node_modules/leaflet/dist/images",
+      "to": "public/vendor/leaflet/images"
+    },
+    {
+      "from": "node_modules/leaflet-providers/leaflet-providers.js",
+      "to": "public/vendor/leaflet-providers/leaflet-providers.js"
+    },
+    {
+      "from": "node_modules/leaflet-heatmap/leaflet-heatmap.js",
+      "to": "public/vendor/leaflet-heatmap/leaflet-heatmap.js"
+    },
+    {
+      "from": "node_modules/heatmap.js/build/heatmap.js",
+      "to": "public/vendor/heatmap.js/heatmap.js"
+    },
+    {
+      "from": "node_modules/jquery/dist/jquery.js",
+      "to": "public/vendor/jquery/jquery.js"
+    }
+  ]
+}

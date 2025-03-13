@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "automerge": true,
+  "extends": [
+    "config:recommended",
+    ":semanticCommitsDisabled"
+  ],
+  "schedule": [
+    "monthly"
+  ],
+  "reviewers": [
+    "strangelookingnerd"
+  ],
+  "labels": [
+    "dependencies"
+  ]
+}

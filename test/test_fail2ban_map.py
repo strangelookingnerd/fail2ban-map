@@ -4,7 +4,7 @@ import unittest
 import json
 import os
 # pylint: disable=import-error
-from public.fail2ban_map import find_lat_lng, add
+from script.fail2ban_map import find_lat_lng, add
 
 class Test(unittest.TestCase):
     """Collection of tests for fail2ban_map."""

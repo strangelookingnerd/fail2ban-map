@@ -27,7 +27,7 @@ import random
 import sys
 import requests
 
-JSON_FILE = "places.geojson"
+JSON_FILE = "../public/places.geojson"
 GEOIP_API = "http://ip-api.com/json/{}"
 ADD_RANDOM_OFFSET = True
 

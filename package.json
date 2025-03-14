@@ -14,10 +14,9 @@
   "type": "commonjs",
   "description": "",
   "dependencies": {
-    "heatmap.js": "2.0.5",
     "jquery": "3.7.1",
     "leaflet": "1.9.4",
-    "leaflet-heatmap": "1.0.0",
+    "leaflet.heat": "0.2.0",
     "leaflet-providers": "2.0.0"
   },
   "devDependencies": {
@@ -47,12 +46,8 @@
       "to": "public/vendor/leaflet-providers/leaflet-providers.js"
     },
     {
-      "from": "node_modules/leaflet-heatmap/leaflet-heatmap.js",
-      "to": "public/vendor/leaflet-heatmap/leaflet-heatmap.js"
-    },
-    {
-      "from": "node_modules/heatmap.js/build/heatmap.js",
-      "to": "public/vendor/heatmap.js/heatmap.js"
+      "from": "node_modules/leaflet.heat/dist/leaflet-heat.js",
+      "to": "public/vendor/leaflet.heat/leaflet-heat.js"
     },
     {
       "from": "node_modules/jquery/dist/jquery.js",

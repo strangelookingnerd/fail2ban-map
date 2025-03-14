@@ -14,11 +14,11 @@
   "type": "commonjs",
   "description": "",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.7.2",
-    "github-fork-ribbon-css": "^0.2.3",
+    "@fortawesome/fontawesome-free": "6.7.2",
+    "github-fork-ribbon-css": "0.2.3",
     "jquery": "3.7.1",
     "leaflet": "1.9.4",
-    "leaflet-extra-markers": "^1.2.2",
+    "leaflet-extra-markers": "1.2.2",
     "leaflet-providers": "2.0.0",
     "leaflet.heat": "0.2.0"
   },

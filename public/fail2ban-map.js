@@ -65,7 +65,7 @@ window.onload = async function () {
         <img src="./favicon.ico" alt="Icon">
         <div class="banned-count">${data.features.length} banned IP</div>
     </div>
-    <a class="github-fork-ribbon" href="https://github.com/strangelookingnerd/fail2ban-map" 
+    <a class="github-fork-ribbon" target="_blank" href="https://github.com/strangelookingnerd/fail2ban-map" 
        data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>`);
 
     data.features.forEach((feature) => {

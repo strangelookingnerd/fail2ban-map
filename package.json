@@ -14,10 +14,13 @@
   "type": "commonjs",
   "description": "",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "github-fork-ribbon-css": "^0.2.3",
     "jquery": "3.7.1",
     "leaflet": "1.9.4",
-    "leaflet.heat": "0.2.0",
-    "leaflet-providers": "2.0.0"
+    "leaflet-extra-markers": "^1.2.2",
+    "leaflet-providers": "2.0.0",
+    "leaflet.heat": "0.2.0"
   },
   "devDependencies": {
     "prettier": "3.5.3",
@@ -38,10 +41,6 @@
       "to": "public/vendor/leaflet/leaflet.css"
     },
     {
-      "from": "node_modules/leaflet/dist/images",
-      "to": "public/vendor/leaflet/images"
-    },
-    {
       "from": "node_modules/leaflet-providers/leaflet-providers.js",
       "to": "public/vendor/leaflet-providers/leaflet-providers.js"
     },
@@ -52,6 +51,26 @@
     {
       "from": "node_modules/jquery/dist/jquery.js",
       "to": "public/vendor/jquery/jquery.js"
+    },
+    {
+      "from": "node_modules/github-fork-ribbon-css/gh-fork-ribbon.css",
+      "to": "public/vendor/github-fork-ribbon-css/gh-fork-ribbon.css"
+    },
+    {
+      "from": "node_modules/leaflet-extra-markers/dist/js/leaflet.extra-markers.js",
+      "to": "public/vendor/leaflet-extra-markers/js/leaflet.extra-markers.js"
+    },
+    {
+      "from": "node_modules/leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css",
+      "to": "public/vendor/leaflet-extra-markers/css/leaflet.extra-markers.min.css"
+    },
+    {
+      "from": "node_modules/leaflet-extra-markers/dist/img",
+      "to": "public/vendor/leaflet-extra-markers/img"
+    },
+    {
+      "from": "node_modules/@fortawesome/fontawesome-free/js/all.js",
+      "to": "public/vendor/fontawesome/all.js"
     }
   ]
 }

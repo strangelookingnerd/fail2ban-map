@@ -33,6 +33,7 @@ window.onload = async function () {
   // list of tile providers can be seen here: https://leaflet-extras.github.io/leaflet-providers/preview/
   L.tileLayer.provider("CartoDB.DarkMatterNoLabels").addTo(map);
 
+  const info = L.control.info();
   const markersLayer = L.geoJson(null);
   const heatmapLayer = L.heatLayer([], {
     radius: 35,
@@ -51,23 +52,37 @@ window.onload = async function () {
       0.55: "rgb(127,0,255)",
     },
   });
-  const info = L.control.info();
 
   try {
     const response = await fetch("places.geojson");
     const data = await response.json();
 
+    info.setTitle(`
+    <i style="color: rgb(69, 69, 69)" class="fa-solid fa-circle-info"></i>&nbsp;Info`);
 
-    info.setContent(
-      data.features.length + " banned IP" +
-      "<a class=\"github-fork-ribbon\" href=\"https://url.to-your.repo\" data-ribbon=\"Fork me on GitHub\" title=\"Fork me on GitHub\">Fork me on GitHub</a>"
-    );
+    info.setContent(`
+    <div class="info-container">
+        <img src="./favicon.ico" alt="Icon">
+        <div class="banned-count">${data.features.length} banned IP</div>
+    </div>
+    <a class="github-fork-ribbon" href="https://github.com/strangelookingnerd/fail2ban-map" 
+       data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>`);
 
     data.features.forEach((feature) => {
       const { properties, geometry } = feature;
       if (!properties?.show_on_map) return;
 
+      const icon = L.ExtraMarkers.icon({
+        icon: "fa-solid fa-ban",
+        markerColor: "red",
+        shape: "circle",
+        svg: "true",
+      });
+
       const layer = L.geoJSON(feature, {
+        pointToLayer: (feature, latlng) => {
+          return L.marker(latlng, { icon: icon });
+        },
         onEachFeature: (feature, layer) => {
           if (properties?.place) {
             layer.bindTooltip(properties.place);
@@ -84,7 +99,6 @@ window.onload = async function () {
 
   markersLayer.addTo(map);
   info.addTo(map);
-
 
   L.control
     .layers({ Markers: markersLayer, Heatmap: heatmapLayer }, null, {

@@ -1,14 +1,14 @@
 L.Control.Info = L.Control.extend({
   options: {
-    title: 'Info',
-    titleTooltip: 'Click here for more info',
-    content: '',
-    maxWidth: '250px',
-    titleClass: '',
-    contentClass: ''
+    title: "Info",
+    titleTooltip: "Click here for more info",
+    content: "",
+    maxWidth: "250px",
+    titleClass: "",
+    contentClass: "",
   },
 
-  initialize: function(options) {
+  initialize: function (options) {
     L.Util.setOptions(this, options);
     this._infoContainer = null;
     this._infoTitleContainer = null;
@@ -21,28 +21,28 @@ L.Control.Info = L.Control.extend({
     this._titleShown = false;
     this._titleClass = this.options.titleClass;
     this._contentClass = this.options.contentClass;
-    this._infoTitleStyle = 'padding: 5px;';
-    this._infoContainerClasses = 'leaflet-control-layers leaflet-control';
+    this._infoTitleStyle = "padding: 5px;";
+    this._infoContainerClasses = "leaflet-control-layers leaflet-control";
   },
 
-  onAdd: function(map) {
-    var infoContainer = L.DomUtil.create('div', 'leaflet-control-layers');
+  onAdd: function (map) {
+    let infoContainer = L.DomUtil.create("div", "leaflet-control-layers");
 
-    var infoTitle = L.DomUtil.create('div');
+    let infoTitle = L.DomUtil.create("div");
     infoContainer.appendChild(infoTitle);
-    infoTitle.setAttribute('style', this._infoTitleStyle);
+    infoTitle.setAttribute("style", this._infoTitleStyle);
 
-    var infoBody = L.DomUtil.create('div', 'leaflet-popup-content-wraper');
+    let infoBody = L.DomUtil.create("div", "leaflet-popup-content-wraper");
     infoContainer.appendChild(infoBody);
-    infoBody.setAttribute('style', 'max-width:' + this.options.maxWidth);
+    infoBody.setAttribute("style", "max-width:" + this.options.maxWidth);
 
-    var infoContent = L.DomUtil.create('div', 'leaflet-popup-content');
+    let infoContent = L.DomUtil.create("div", "leaflet-popup-content");
     infoBody.appendChild(infoContent);
 
-    var infoCloseButton = L.DomUtil.create('a', 'leaflet-popup-close-button');
+    let infoCloseButton = L.DomUtil.create("a", "leaflet-popup-close-button");
     infoContainer.appendChild(infoCloseButton);
-    infoCloseButton.innerHTML = 'x';
-    infoCloseButton.setAttribute('style', 'cursor: pointer');
+    infoCloseButton.innerHTML = "x";
+    infoCloseButton.setAttribute("style", "cursor: pointer");
 
     this._infoContainer = infoContainer;
     this._infoTitleContainer = infoTitle;
@@ -55,44 +55,44 @@ L.Control.Info = L.Control.extend({
     this._showTitle();
 
     L.DomEvent.disableClickPropagation(infoContainer);
-    L.DomEvent.on(infoCloseButton, 'click', L.DomEvent.stop);
-    L.DomEvent.on(infoContainer, 'click', this._showContent, this);
-    L.DomEvent.on(infoCloseButton, 'click', this._showTitle, this);
+    L.DomEvent.on(infoCloseButton, "click", L.DomEvent.stop);
+    L.DomEvent.on(infoContainer, "click", this._showContent, this);
+    L.DomEvent.on(infoCloseButton, "click", this._showTitle, this);
 
     return infoContainer;
   },
 
-  onRemove: function(map){},
+  onRemove: function (map) {},
 
-  setTitle: function(title) {
+  setTitle: function (title) {
     this._infoTitle = title;
     if (this._infoTitleContainer != null) {
       this._infoTitleContainer.innerHTML = title;
     }
   },
 
-  setTitleTooltip: function(titleTooltip) {
+  setTitleTooltip: function (titleTooltip) {
     this._infoTitleTooltip = titleTooltip;
     if (this._titleShown) {
       this._showTitleTooltip(true);
     }
   },
 
-  setContent: function(content) {
+  setContent: function (content) {
     this._infoContent = content;
     if (this._infoContentContainer != null) {
       this._infoContentContainer.innerHTML = content;
     }
   },
 
-  setTitleClass: function(titleClass) {
+  setTitleClass: function (titleClass) {
     this._titleClass = titleClass;
     if (this._titleShown) {
       this._addInfoClass(this._titleClass);
     }
   },
 
-  setContentClass: function(contentClass) {
+  setContentClass: function (contentClass) {
     this._contentClass = contentClass;
     if (!this._titleShown) {
       this._addInfoClass(this._contentClass);
@@ -120,22 +120,22 @@ L.Control.Info = L.Control.extend({
   },
 
   _showTitleTooltip: function (showIt) {
-    this._infoContainer.setAttribute('Title', (showIt) ? this._infoTitleTooltip : '');
+    this._infoContainer.setAttribute("Title", showIt ? this._infoTitleTooltip : "");
   },
 
   _displayElement: function (element, displayIt) {
-    element.style.display = (displayIt) ? '' : 'none';
+    element.style.display = displayIt ? "" : "none";
   },
 
   _setCursorToPointer: function (element, setIt) {
-    element.style.cursor = (setIt) ? 'pointer' : '';
+    element.style.cursor = setIt ? "pointer" : "";
   },
 
   _addInfoClass: function (classToAdd) {
-    L.DomUtil.setClass(this._infoContainer, this._infoContainerClasses + ' ' + classToAdd);
-  }
-})
+    L.DomUtil.setClass(this._infoContainer, this._infoContainerClasses + " " + classToAdd);
+  },
+});
 
-L.control.info = function(opts) {
+L.control.info = function (opts) {
   return new L.Control.Info(opts);
-}
+};

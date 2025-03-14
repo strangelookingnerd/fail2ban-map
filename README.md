@@ -26,25 +26,37 @@ fail2ban-map is a re-write of on [fail2map](https://github.com/tachtler/fail2map
 
 ## Installation
 
-1. Place fail2ban-map in the desired path of your web server
+* Place fail2ban-map in the desired path of your web server
 
     ```bash
     git clone https://github.com/strangelookingnerd/fail2ban-map /home/pi
     ```
+* Install dependencies
 
-2. Edit `script/fail2ban-map-action.conf` with the correct path to fail2ban_map.py
+    ```bash
+    cd /home/pi/fail2ban-map
+    npm install
+    pip install -r requirements.txt
+    ```
+
+* Edit `script/fail2ban-map-action.conf` with the correct path to fail2ban_map.py
+
+    ```bash
+    nano /home/pi/fail2ban-map/script/fail2ban-map-action.conf
+    
+    ```
 
     ```
-    fail2ban-map-action = cd /home/pi/fail2ban-map/script && python fail2ban_map.py
+    fail2ban-map = cd /home/pi/fail2ban-map/script && python fail2ban_map.py
     ```
 
-3.  Move `script/fail2ban-map-action.conf` to fail2ban actions folder 
+*  Move `script/fail2ban-map-action.conf` to fail2ban actions folder 
 
     ```bash
     mv /home/pi/fail2ban-map/script/fail2ban-map-action.conf /etc/fail2ban/action.d/
     ```
     
-4. Add the action to your `jail.conf` or `jail.local`
+* Add the action to your `jail.conf` or `jail.local`
 
     ```
     # The simplest action to take: ban only
@@ -52,7 +64,7 @@ fail2ban-map is a re-write of on [fail2map](https://github.com/tachtler/fail2map
               fail2ban-map-action
     ```
 
-5. (Optional) Change the tile provider in `public/fail2ban-map.js`
+* (Optional) Change the tile provider in `public/fail2ban-map.js`
 
     ```javascript
     // list of tile providers can be seen here: https://leaflet-extras.github.io/leaflet-providers/preview/

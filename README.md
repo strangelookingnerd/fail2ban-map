@@ -19,6 +19,8 @@
 fail2ban-map is a map generator for [fail2ban](http://www.fail2ban.org).
 It displays banned IP on a world map. Adding IP is done through a fail2ban *action* included in this repository.
 
+Check out the [demo](https://strangelookingnerd.github.io/fail2ban-map/) 
+
 fail2ban-map is a re-write of [fail2map](https://github.com/tachtler/fail2map) by Manuel Vonthron and Klaus Tachtler.
 
 ## Installation
@@ -47,10 +49,10 @@ fail2ban-map is a re-write of [fail2map](https://github.com/tachtler/fail2map) b
     fail2ban-map = cd /home/pi/fail2ban-map/script && python fail2ban_map.py
     ```
 
-*  Move `script/fail2ban-map-action.conf` to fail2ban actions folder 
+*  Create a symlink to `script/fail2ban-map-action.conf` in the fail2ban actions folder 
 
     ```bash
-    mv /home/pi/fail2ban-map/script/fail2ban-map-action.conf /etc/fail2ban/action.d/
+    ln -s /home/pi/fail2ban-map/script/fail2ban-map-action.conf /etc/fail2ban/action.d/fail2ban-map-action.conf
     ```
     
 * Add the action to your `jail.conf` or `jail.local`

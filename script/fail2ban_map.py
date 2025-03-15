@@ -25,8 +25,8 @@
 import json
 import os
 import random
-import requests
 import sys
+import requests
 
 JSON_FILE = os.path.dirname(os.path.realpath(__file__)) + "/../public/places.geojson"
 GEOIP_API = "http://ip-api.com/json/{}"

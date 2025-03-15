@@ -40,6 +40,7 @@ jobs:
         run: |
           python -m pytest
       - name: Generate places.geojson
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           python -c "
           import os
@@ -55,12 +56,15 @@ jobs:
               os.system(f'python ./script/fail2ban_map.py {ip}')
           "
       - name: Configure Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/configure-pages@v5
       - name: Upload artifact for deployment
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
       - name: Deploy to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/deploy-pages@v4
       
           

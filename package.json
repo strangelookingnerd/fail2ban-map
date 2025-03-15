@@ -5,6 +5,7 @@
   "scripts": {
     "prettier-check": "npx prettier ./public --check",
     "prettier-fix": "npx prettier ./public --write",
+    "test": "npx jest",
     "preinstall": "rimraf public/vendor",
     "postinstall": "vendor-copy"
   },
@@ -23,7 +24,9 @@
     "leaflet.heat": "0.2.0"
   },
   "devDependencies": {
+    "jest": "29.7.0",
     "prettier": "3.5.3",
+    "puppeteer": "24.4.0",
     "rimraf": "6.0.1",
     "vendor-copy": "3.0.1"
   },

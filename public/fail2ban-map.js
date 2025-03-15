@@ -26,7 +26,7 @@ window.onload = async function () {
   const map = L.map("map", {
     center: [30, 0],
     zoom: 3,
-    minZoom: 3,
+    minZoom: 2,
     worldCopyJump: true,
   });
 

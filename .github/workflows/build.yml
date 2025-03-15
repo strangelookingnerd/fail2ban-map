@@ -23,8 +23,8 @@ jobs:
         run: npm install
       - name: Analysing the code with prettier
         run: npm run prettier-check
-      - name: Run tests
-        run: npm run prettier-check
+      - name: Run tests with jest
+        run: npm run test
       - name: Use Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
@@ -52,7 +52,7 @@ jobs:
           def random_ip():
               return '.'.join(str(random.randint(0, 255)) for _ in range(4))
           
-          ips = [random_ip() for _ in range(250)]
+          ips = [random_ip() for _ in range(random.randint(100, 200))]
           for ip in ips:
               time.sleep(1.5)
               os.system(f'python ./script/fail2ban_map.py {ip}')

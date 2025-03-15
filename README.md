@@ -19,7 +19,7 @@
 fail2ban-map is a map generator for [fail2ban](http://www.fail2ban.org).
 It displays banned IP on a world map. Adding IP is done through a fail2ban *action* included in this repository.
 
-Check out the [demo](https://strangelookingnerd.github.io/fail2ban-map/) 
+Check out the [demo](https://strangelookingnerd.github.io/fail2ban-map/).
 
 fail2ban-map is a re-write of [fail2map](https://github.com/tachtler/fail2map) by Manuel Vonthron and Klaus Tachtler.
 
@@ -45,7 +45,7 @@ fail2ban-map is a re-write of [fail2map](https://github.com/tachtler/fail2map) b
     
     ```
 
-    ```
+    ```bash
     fail2ban-map = cd /home/pi/fail2ban-map/script && python fail2ban_map.py
     ```
 
@@ -57,7 +57,7 @@ fail2ban-map is a re-write of [fail2map](https://github.com/tachtler/fail2map) b
     
 * Add the action to your `jail.conf` or `jail.local`
 
-    ```
+    ```bash
     # The simplest action to take: ban only
     action_ = %(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
               fail2ban-map-action
@@ -67,9 +67,5 @@ fail2ban-map is a re-write of [fail2map](https://github.com/tachtler/fail2map) b
 
     ```javascript
     // list of tile providers can be seen here: https://leaflet-extras.github.io/leaflet-providers/preview/
-    L.tileLayer
-      .provider("CartoDB.DarkMatterNoLabels", {
-        noWrap: true, 
-      })
-      .addTo(map);
+    L.tileLayer.provider("CartoDB.DarkMatterNoLabels").addTo(map);
     ```

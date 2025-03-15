@@ -48,6 +48,7 @@ jobs:
           ips = [random_ip() for _ in range(100)]
           for ip in ips:
               os.system(f'python ./script/fail2ban_map.py {ip}')
+          "
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact for deployment

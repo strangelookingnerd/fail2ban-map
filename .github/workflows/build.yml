@@ -9,7 +9,7 @@ on:
       - main
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04 # https://github.com/puppeteer/puppeteer/issues/12818
     permissions:
       id-token: write
       pages: write

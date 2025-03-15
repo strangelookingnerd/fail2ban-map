@@ -8,7 +8,7 @@ on:
     branches:
       - main
 jobs:
-  build-frontend:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,10 +20,6 @@ jobs:
         run: npm install
       - name: Analysing the code with prettier
         run: npm run prettier-check
-  build-backend:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
       - name: Use Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
@@ -40,3 +36,25 @@ jobs:
       - name: Run tests with pytest
         run: |
           python -m pytest
+      - name: Generate places.geojson
+        run: |
+          python -c "
+          import random
+          import os
+        
+          def random_ip():
+              return '.'.join(str(random.randint(0, 255)) for _ in range(4))
+          
+          ips = [random_ip() for _ in range(100)]
+          for ip in ips:
+              os.system(f'python ./script/fail2ban_map.py {ip}')
+      - name: Configure Pages
+        uses: actions/configure-pages@v3
+      - name: Upload artifact for deployment
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./public
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
+      
+          

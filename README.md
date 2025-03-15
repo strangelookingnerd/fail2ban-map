@@ -19,11 +19,11 @@
 fail2ban-map is a map generator for [fail2ban](http://www.fail2ban.org).
 It displays banned IP on a world map. Adding IP is done through a fail2ban *action* included in this repository.
 
-fail2ban-map is a re-write of on [fail2map](https://github.com/tachtler/fail2map) by Manuel Vonthron and Klaus Tachtler.
+fail2ban-map is a re-write of [fail2map](https://github.com/tachtler/fail2map) by Manuel Vonthron and Klaus Tachtler.
 
 ## Installation
 
-* Place fail2ban-map in the desired path of your web server
+* Clone fail2ban-map to the desired location
 
     ```bash
     git clone https://github.com/strangelookingnerd/fail2ban-map /home/pi

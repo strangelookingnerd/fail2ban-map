@@ -10,6 +10,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      pages: write
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
@@ -39,14 +42,16 @@ jobs:
       - name: Generate places.geojson
         run: |
           python -c "
-          import random
           import os
+          import random
+          import time
         
           def random_ip():
               return '.'.join(str(random.randint(0, 255)) for _ in range(4))
           
           ips = [random_ip() for _ in range(100)]
           for ip in ips:
+              time.sleep(2)
               os.system(f'python ./script/fail2ban_map.py {ip}')
           "
       - name: Configure Pages

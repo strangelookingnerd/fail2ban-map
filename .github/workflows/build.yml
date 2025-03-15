@@ -50,9 +50,9 @@ jobs:
           def random_ip():
               return '.'.join(str(random.randint(0, 255)) for _ in range(4))
           
-          ips = [random_ip() for _ in range(1000)]
+          ips = [random_ip() for _ in range(250)]
           for ip in ips:
-              time.sleep(1)
+              time.sleep(1.5)
               os.system(f'python ./script/fail2ban_map.py {ip}')
           "
       - name: Configure Pages

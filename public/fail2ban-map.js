@@ -69,7 +69,7 @@ window.onload = async function () {
     <a class="github-fork-ribbon" target="_blank" href="https://github.com/strangelookingnerd/fail2ban-map" 
        data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
     <div class="info-container">
-        <img src="./favicon.ico" alt="Icon">
+        <img src="./favicon.ico" alt="fail2ban-map icon" title="fail2ban-map &copy; strangelookingnerd">
         <div class="banned-count">${data.features.length} banned IP</div>
     </div>`);
 

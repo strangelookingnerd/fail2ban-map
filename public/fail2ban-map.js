@@ -34,7 +34,9 @@ window.onload = async function () {
   L.tileLayer.provider("CartoDB.DarkMatterNoLabels").addTo(map);
 
   const info = L.control.info({
-    title: `<i style="color: rgb(69, 69, 69)" class="fa-solid fa-circle-info"></i>&nbsp;Info`,
+    title: `<div title="Click here for more info">
+              <i style="color: rgb(69, 69, 69)" class="fa-solid fa-circle-info"></i>&nbsp;Info
+            </div>`,
   });
   const markersLayer = L.geoJson(null);
   const marker = L.ExtraMarkers.icon({
@@ -66,11 +68,13 @@ window.onload = async function () {
     const data = await response.json();
 
     info.setContent(`
-    <a class="github-fork-ribbon" target="_blank" href="https://github.com/strangelookingnerd/fail2ban-map" 
-       data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
-    <div class="info-container">
-        <img src="./favicon.ico" alt="fail2ban-map icon" title="fail2ban-map &copy; strangelookingnerd">
-        <div class="banned-count">${data.features.length} banned IP</div>
+    <div title="fail2ban-map &copy; strangelookingnerd">
+      <a class="github-fork-ribbon" target="_blank" href="https://github.com/strangelookingnerd/fail2ban-map" 
+         data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
+      <div class="info-container">
+          <img src="./favicon.ico" alt="fail2ban-map icon">
+          <div class="banned-count">${data.features.length} banned IP</div>
+      </div>
     </div>`);
 
     data.features.forEach((feature) => {

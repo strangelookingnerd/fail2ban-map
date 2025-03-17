@@ -24,139 +24,71 @@
 
 L.Control.Info = L.Control.extend({
   options: {
-    title: "Info",
-    titleTooltip: "Click here for more info",
+    title: "",
     content: "",
-    maxWidth: "250px",
-    titleClass: "",
-    contentClass: "",
   },
 
   initialize: function (options) {
     L.Util.setOptions(this, options);
-    this._infoContainer = null;
-    this._infoTitleContainer = null;
-    this._infoBodyContainer = null;
-    this._infoCloseButtonContainer = null;
-    this._infoContentContainer = null;
-    this._infoTitle = this.options.title;
-    this._infoTitleTooltip = this.options.titleTooltip;
-    this._infoContent = this.options.content;
-    this._titleShown = false;
-    this._titleClass = this.options.titleClass;
-    this._contentClass = this.options.contentClass;
-    this._infoTitleStyle = "padding: 5px;";
-    this._infoContainerClasses = "leaflet-control-layers leaflet-control";
+    this.infoContainer = L.DomUtil.create("div", "leaflet-control-layers");
+
+    this.infoTitle = L.DomUtil.create("div");
+    this.infoTitle.setAttribute("style", "padding: 5px;");
+    this.infoContainer.appendChild(this.infoTitle);
+
+    this.infoContent = L.DomUtil.create("div", "leaflet-popup-content");
+    this.infoContainer.appendChild(this.infoContent);
+
+    this.infoCloseButton = L.DomUtil.create("a", "leaflet-popup-close-button");
+    this.infoCloseButton.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+    this.infoCloseButton.setAttribute("style", "cursor: pointer");
+    this.infoContainer.appendChild(this.infoCloseButton);
+
+    this.setTitle(this.options.title);
+    this.setContent(this.options.content);
+    this.toggle(false);
+
+    L.DomEvent.disableClickPropagation(this.infoContainer);
+    L.DomEvent.on(this.infoCloseButton, "click", L.DomEvent.stop);
+    L.DomEvent.on(
+      this.infoContainer,
+      "click",
+      function () {
+        this.toggle(true);
+      },
+      this,
+    );
+    L.DomEvent.on(
+      this.infoCloseButton,
+      "click",
+      function () {
+        this.toggle(false);
+      },
+      this,
+    );
   },
 
   onAdd: function (map) {
-    let infoContainer = L.DomUtil.create("div", "leaflet-control-layers");
-
-    let infoTitle = L.DomUtil.create("div");
-    infoContainer.appendChild(infoTitle);
-    infoTitle.setAttribute("style", this._infoTitleStyle);
-
-    let infoBody = L.DomUtil.create("div", "leaflet-popup-content-wraper");
-    infoContainer.appendChild(infoBody);
-    infoBody.setAttribute("style", "max-width:" + this.options.maxWidth);
-
-    let infoContent = L.DomUtil.create("div", "leaflet-popup-content");
-    infoBody.appendChild(infoContent);
-
-    let infoCloseButton = L.DomUtil.create("a", "leaflet-popup-close-button");
-    infoContainer.appendChild(infoCloseButton);
-    infoCloseButton.innerHTML = "x";
-    infoCloseButton.setAttribute("style", "cursor: pointer");
-
-    this._infoContainer = infoContainer;
-    this._infoTitleContainer = infoTitle;
-    this._infoBodyContainer = infoBody;
-    this._infoContentContainer = infoContent;
-    this._infoCloseButtonContainer = infoCloseButton;
-
-    infoTitle.innerHTML = this._infoTitle;
-    infoContent.innerHTML = this._infoContent;
-    this._showTitle();
-
-    L.DomEvent.disableClickPropagation(infoContainer);
-    L.DomEvent.on(infoCloseButton, "click", L.DomEvent.stop);
-    L.DomEvent.on(infoContainer, "click", this._showContent, this);
-    L.DomEvent.on(infoCloseButton, "click", this._showTitle, this);
-
-    return infoContainer;
+    return this.infoContainer;
   },
 
   onRemove: function (map) {},
 
   setTitle: function (title) {
-    this._infoTitle = title;
-    if (this._infoTitleContainer != null) {
-      this._infoTitleContainer.innerHTML = title;
-    }
-  },
-
-  setTitleTooltip: function (titleTooltip) {
-    this._infoTitleTooltip = titleTooltip;
-    if (this._titleShown) {
-      this._showTitleTooltip(true);
-    }
+    this.options.title = title;
+    this.infoTitle.innerHTML = title;
   },
 
   setContent: function (content) {
-    this._infoContent = content;
-    if (this._infoContentContainer != null) {
-      this._infoContentContainer.innerHTML = content;
-    }
+    this.options.content = content;
+    this.infoContent.innerHTML = content;
   },
 
-  setTitleClass: function (titleClass) {
-    this._titleClass = titleClass;
-    if (this._titleShown) {
-      this._addInfoClass(this._titleClass);
-    }
-  },
-
-  setContentClass: function (contentClass) {
-    this._contentClass = contentClass;
-    if (!this._titleShown) {
-      this._addInfoClass(this._contentClass);
-    }
-  },
-
-  _showTitle: function (evt) {
-    this._addInfoClass(this._titleClass);
-    this._displayElement(this._infoTitleContainer, true);
-    this._displayElement(this._infoBodyContainer, false);
-    this._displayElement(this._infoCloseButtonContainer, false);
-    this._showTitleTooltip(true);
-    this._setCursorToPointer(this._infoContainer, true);
-    this._titleShown = true;
-  },
-
-  _showContent: function (evt) {
-    this._addInfoClass(this._contentClass);
-    this._displayElement(this._infoTitleContainer, false);
-    this._displayElement(this._infoBodyContainer, true);
-    this._displayElement(this._infoCloseButtonContainer, true);
-    this._showTitleTooltip(false);
-    this._setCursorToPointer(this._infoContainer, false);
-    this._titleShown = false;
-  },
-
-  _showTitleTooltip: function (showIt) {
-    this._infoContainer.setAttribute("Title", showIt ? this._infoTitleTooltip : "");
-  },
-
-  _displayElement: function (element, displayIt) {
-    element.style.display = displayIt ? "" : "none";
-  },
-
-  _setCursorToPointer: function (element, setIt) {
-    element.style.cursor = setIt ? "pointer" : "";
-  },
-
-  _addInfoClass: function (classToAdd) {
-    L.DomUtil.setClass(this._infoContainer, this._infoContainerClasses + " " + classToAdd);
+  toggle: function (extend) {
+    this.infoTitle.style.display = !extend ? "" : "none";
+    this.infoContent.style.display = extend ? "" : "none";
+    this.infoCloseButton.style.display = extend ? "" : "none";
+    this.infoContainer.style.cursor = !extend ? "pointer" : "";
   },
 });
 

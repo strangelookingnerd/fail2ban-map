@@ -52,9 +52,9 @@ jobs:
           def random_ip():
               return '.'.join(str(random.randint(0, 255)) for _ in range(4))
           
-          ips = [random_ip() for _ in range(random.randint(100, 200))]
+          ips = [random_ip() for _ in range(420)]
           for ip in ips:
-              time.sleep(1.5)
+              time.sleep(1.4) # Ratelimit 45 request / minute
               os.system(f'python ./script/fail2ban_map.py {ip}')
           "
       - name: Configure Pages
@@ -68,5 +68,5 @@ jobs:
       - name: Deploy to GitHub Pages
         if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         uses: actions/deploy-pages@v4
-      
-          
+
+

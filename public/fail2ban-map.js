@@ -28,23 +28,21 @@ window.onload = async function () {
     zoom: 3,
     minZoom: 2,
     worldCopyJump: true,
+    preferCanvas: true,
   });
 
   // list of tile providers can be seen here: https://leaflet-extras.github.io/leaflet-providers/preview/
   L.tileLayer.provider("CartoDB.DarkMatterNoLabels").addTo(map);
 
-  const info = L.control.info({
-    title: `<div title="Click here for more info">
+  const info = L.control
+    .info({
+      title: `<div title="Click here for more info">
               <i style="color: rgb(69, 69, 69)" class="fa-solid fa-circle-info"></i>&nbsp;Info
             </div>`,
-  });
-  const markersLayer = L.geoJson(null);
-  const marker = L.ExtraMarkers.icon({
-    icon: "fa-solid fa-ban",
-    markerColor: "red",
-    shape: "circle",
-    svg: "true",
-  });
+    })
+    .addTo(map);
+
+  const markerLayer = L.canvas();
   const heatmapLayer = L.heatLayer([], {
     radius: 35,
     gradient: {
@@ -66,6 +64,7 @@ window.onload = async function () {
   try {
     const response = await fetch("places.geojson");
     const data = await response.json();
+    const heatmapData = [];
 
     info.setContent(`
     <div title="fail2ban-map &copy; strangelookingnerd">
@@ -73,37 +72,41 @@ window.onload = async function () {
          data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
       <div class="info-container">
           <img src="./favicon.ico" alt="fail2ban-map icon">
-          <div class="banned-count">${data.features.length} banned IP</div>
+          <div class="banned-count">
+            ${data.features.length} banned IP from<br />
+            ${new Set(data.features.map((feature) => feature.properties.place.split(", ").pop())).size} different countries
+          </div>
       </div>
     </div>`);
 
     data.features.forEach((feature) => {
-      const { properties, geometry } = feature;
-      if (!properties?.show_on_map) return;
+      if (!feature.properties?.show_on_map) {
+        return;
+      }
 
-      const layer = L.geoJSON(feature, {
-        pointToLayer: (feature, latlng) => {
-          return L.marker(latlng, { icon: marker });
+      L.canvasMarker(feature.geometry.coordinates.reverse(), {
+        renderer: markerLayer,
+        img: {
+          url: "./assets/img/marker.svg",
+          size: [24, 33],
+          offset: { x: 0, y: -16 },
         },
-        onEachFeature: (feature, layer) => {
-          if (properties?.place) {
-            layer.bindTooltip(properties.place);
-          }
-        },
-      });
+      })
+        .bindTooltip(feature.properties.place, {
+          offset: { x: 12, y: -20 },
+        })
+        .addTo(map);
 
-      markersLayer.addLayer(layer);
-      heatmapLayer.addLatLng(geometry.coordinates.reverse());
+      heatmapData.push(feature.geometry.coordinates);
     });
+
+    heatmapLayer.setLatLngs(heatmapData);
   } catch (error) {
     console.error("Error loading GeoJSON:", error);
   }
 
-  markersLayer.addTo(map);
-  info.addTo(map);
-
   L.control
-    .layers({ Markers: markersLayer, Heatmap: heatmapLayer }, null, {
+    .layers({ Markers: markerLayer, Heatmap: heatmapLayer }, null, {
       collapsed: false,
     })
     .setPosition("bottomleft")

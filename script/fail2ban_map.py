@@ -86,7 +86,6 @@ def add(ip_address: str, json_file=JSON_FILE) -> None:
 
 def remove(ip_address: str, json_file=JSON_FILE) -> None:
     """Removes an IP from the GeoJSON file."""
-
     data = _load_json(json_file)
 
     if data is not None:

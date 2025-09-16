@@ -26,7 +26,7 @@
   "devDependencies": {
     "jest": "30.1.3",
     "prettier": "3.6.2",
-    "puppeteer": "24.17.0",
+    "puppeteer": "24.21.0",
     "rimraf": "6.0.1",
     "vendor-copy": "3.0.1"
   },

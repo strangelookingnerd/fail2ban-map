@@ -28,7 +28,7 @@ jobs:
       - name: Run tests with jest
         run: npm run test
       - name: Use Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.13
       - name: Install dependencies

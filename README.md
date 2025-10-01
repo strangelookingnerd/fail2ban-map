@@ -1,6 +1,7 @@
 # fail2ban-map 
 
 [![build](https://github.com/strangelookingnerd/fail2ban-map/actions/workflows/build.yml/badge.svg)](https://github.com/strangelookingnerd/fail2ban-map/actions/workflows/build.yml)
+[![codecov](https://codecov.io/gh/strangelookingnerd/fail2ban-map/graph/badge.svg?token=LKNIZWF5E8)](https://codecov.io/gh/strangelookingnerd/fail2ban-map)
 
 ```
  _______  _______  ___  ___      _______  _______  _______  __    _        __   __  _______  _______ 

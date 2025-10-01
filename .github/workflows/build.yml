@@ -46,9 +46,6 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: |
-            coverage.xml
-            ./coverage/lcov.info
           fail_ci_if_error: true
       - name: Generate places.geojson
         if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')

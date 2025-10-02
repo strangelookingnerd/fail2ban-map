@@ -15,7 +15,7 @@
   "type": "commonjs",
   "description": "",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "7.0.1",
+    "@fortawesome/fontawesome-free": "7.1.0",
     "github-fork-ribbon-css": "0.2.3",
     "jquery": "3.7.1",
     "leaflet": "1.9.4",

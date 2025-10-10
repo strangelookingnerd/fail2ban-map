@@ -20,8 +20,9 @@
     "jquery": "3.7.1",
     "leaflet": "1.9.4",
     "leaflet-canvas-markers": "1.0.7",
-    "leaflet-providers": "2.0.0",
-    "leaflet.heat": "0.2.0"
+    "leaflet.heat": "0.2.0",
+    "leaflet.layerscontrol-minimap": "1.0.21",
+    "leaflet-providers": "2.0.0"
   },
   "devDependencies": {
     "jest": "30.2.0",
@@ -31,6 +32,18 @@
     "vendor-copy": "3.0.1"
   },
   "vendorCopy": [
+    {
+      "from": "node_modules/@fortawesome/fontawesome-free/js/all.js",
+      "to": "public/vendor/fontawesome/all.js"
+    },
+    {
+      "from": "node_modules/github-fork-ribbon-css/gh-fork-ribbon.css",
+      "to": "public/vendor/github-fork-ribbon-css/gh-fork-ribbon.css"
+    },
+    {
+      "from": "node_modules/jquery/dist/jquery.js",
+      "to": "public/vendor/jquery/jquery.js"
+    },
     {
       "from": "node_modules/leaflet/dist/leaflet.js",
       "to": "public/vendor/leaflet/leaflet.js"
@@ -44,28 +57,28 @@
       "to": "public/vendor/leaflet/leaflet.css"
     },
     {
-      "from": "node_modules/leaflet-providers/leaflet-providers.js",
-      "to": "public/vendor/leaflet-providers/leaflet-providers.js"
-    },
-    {
-      "from": "node_modules/leaflet.heat/dist/leaflet-heat.js",
-      "to": "public/vendor/leaflet.heat/leaflet-heat.js"
-    },
-    {
-      "from": "node_modules/jquery/dist/jquery.js",
-      "to": "public/vendor/jquery/jquery.js"
-    },
-    {
-      "from": "node_modules/github-fork-ribbon-css/gh-fork-ribbon.css",
-      "to": "public/vendor/github-fork-ribbon-css/gh-fork-ribbon.css"
+      "from": "node_modules/leaflet/dist/images/layers.png",
+      "to": "public/vendor/leaflet/images/layers.png"
     },
     {
       "from": "node_modules/leaflet-canvas-markers/leaflet-canvas-markers.js",
       "to": "public/vendor/leaflet-canvas-markers/leaflet-canvas-markers.js"
     },
     {
-      "from": "node_modules/@fortawesome/fontawesome-free/js/all.js",
-      "to": "public/vendor/fontawesome/all.js"
+      "from": "node_modules/leaflet.heat/dist/leaflet-heat.js",
+      "to": "public/vendor/leaflet.heat/leaflet-heat.js"
+    },
+    {
+      "from": "node_modules/leaflet.layerscontrol-minimap/control.layers.minimap.css",
+      "to": "public/vendor/leaflet.layerscontrol-minimap/control.layers.minimap.css"
+    },
+    {
+      "from": "node_modules/leaflet.layerscontrol-minimap/L.Control.Layers.Minimap.js",
+      "to": "public/vendor/leaflet.layerscontrol-minimap/L.Control.Layers.Minimap.js"
+    },
+    {
+      "from": "node_modules/leaflet-providers/leaflet-providers.js",
+      "to": "public/vendor/leaflet-providers/leaflet-providers.js"
     }
   ]
 }

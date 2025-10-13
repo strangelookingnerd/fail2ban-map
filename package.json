@@ -61,6 +61,10 @@
       "to": "public/vendor/leaflet/images/layers.png"
     },
     {
+      "from": "node_modules/leaflet/dist/images/layers-2x.png",
+      "to": "public/vendor/leaflet/images/layers-2x.png"
+    },
+    {
       "from": "node_modules/leaflet-canvas-markers/leaflet-canvas-markers.js",
       "to": "public/vendor/leaflet-canvas-markers/leaflet-canvas-markers.js"
     },

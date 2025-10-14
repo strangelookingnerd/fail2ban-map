@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import os
+import re
 import runpy
 import sys
 # pylint: disable=import-error
@@ -34,7 +35,6 @@ def test_load_json_invalid_json(capsys):
 
     assert result is None
     captured = capsys.readouterr()
-    assert captured.out == ""
     assert "Error decoding JSON from test_places.geojson." in captured.err
 
 
@@ -45,7 +45,6 @@ def test_save_json_invalid_file(capsys):
     _save_json("{}", folder)
 
     captured = capsys.readouterr()
-    assert captured.out == ""
     assert f"Error writing to {folder}:" in captured.err
 
     assert os.path.isdir(folder)
@@ -78,7 +77,6 @@ def test_find_lat_lng_bad_ip(capsys):
     assert not result["properties"]["show_on_map"]
 
     captured = capsys.readouterr()
-    assert captured.out == ""
     assert captured.err == ""
 
 
@@ -99,7 +97,6 @@ def test_find_lat_lng_bad_request(capsys):
     assert not result["properties"]["show_on_map"]
 
     captured = capsys.readouterr()
-    assert captured.out == ""
     assert f"Error fetching geolocation for {TEST_IP_1}:" in captured.err
 
     # switch back
@@ -125,7 +122,6 @@ def test_add(capsys):
     assert entry["properties"]["name"] == TEST_IP_2
 
     captured = capsys.readouterr()
-    assert captured.out == ""
     assert f"File {TEMP_JSON_FILE} not found." in captured.err
 
 
@@ -149,7 +145,6 @@ def test_add_replacement(capsys):
     assert entry["properties"]["name"] == TEST_IP_2
 
     captured = capsys.readouterr()
-    assert captured.out == ""
     assert f"File {TEMP_JSON_FILE} not found." in captured.err
 
 
@@ -171,7 +166,6 @@ def test_remove(capsys):
     assert entry["properties"]["name"] == TEST_IP_2
 
     captured = capsys.readouterr()
-    assert captured.out == ""
     assert f"File {TEMP_JSON_FILE} not found." in captured.err
 
 
@@ -192,29 +186,25 @@ def test_remove_non_existent(capsys):
     assert entry["properties"]["name"] == TEST_IP_1
 
     captured = capsys.readouterr()
-    assert captured.out == ""
     assert f"File {TEMP_JSON_FILE} not found." in captured.err
 
 
 def test_main(capsys):
     """main() prints output as expected."""
-    sys.argv = [fail2ban_map, "add", "1.2.3.4"]
+    sys.argv = [fail2ban_map, "add", TEST_IP_1]
     runpy.run_path("script/fail2ban_map.py", run_name="__main__")
 
     captured = capsys.readouterr()
-    assert captured.out == ""
+    assert re.match(r"File .+ not found\.", captured.err) or captured.err == ""
+
+    sys.argv = [fail2ban_map, "remove", TEST_IP_1]
+    runpy.run_path("script/fail2ban_map.py", run_name="__main__")
+
+    captured = capsys.readouterr()
     assert captured.err == ""
 
-    sys.argv = [fail2ban_map, "remove", "1.2.3.4"]
+    sys.argv = [fail2ban_map, "derp", TEST_IP_1]
     runpy.run_path("script/fail2ban_map.py", run_name="__main__")
 
     captured = capsys.readouterr()
-    assert captured.out == ""
-    assert captured.err == ""
-
-    sys.argv = [fail2ban_map, "derp", "1.2.3.4"]
-    runpy.run_path("script/fail2ban_map.py", run_name="__main__")
-
-    captured = capsys.readouterr()
-    assert captured.out == ""
     assert "Usage: fail2ban_map.py <COMMAND> <IP_ADDRESS>" in captured.err

@@ -15,13 +15,6 @@ TEMP_JSON_FILE = "test_places.geojson"
 
 
 # pylint: disable=unused-argument
-def setup_function(function):
-    """Runs before each test."""
-    if os.path.exists(TEMP_JSON_FILE):
-        os.remove(TEMP_JSON_FILE)
-
-
-# pylint: disable=unused-argument
 def teardown_function(function):
     """Runs after each test to clean up."""
     if os.path.exists(TEMP_JSON_FILE):

@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import math
 import os
 import re
 import runpy
@@ -62,6 +63,26 @@ def test_find_lat_lng():
     assert -180 <= result["geometry"]["coordinates"][0] <= 180
     assert -90 <= result["geometry"]["coordinates"][1] <= 90
     assert result["properties"]["show_on_map"]
+
+
+def test_find_lat_lng_without_offset():
+    """Test find_lat_lng() fetches real coordinates from API."""
+    # switch flag
+    flag = fail2ban_map.ADD_RANDOM_OFFSET
+    fail2ban_map.ADD_RANDOM_OFFSET = False
+
+    result = find_lat_lng(TEST_IP_1)
+
+    assert isinstance(result, dict)
+    assert "geometry" in result
+    assert "coordinates" in result["geometry"]
+    assert len(result["geometry"]["coordinates"]) == 2
+    assert math.isclose(result["geometry"]["coordinates"][0], -77.5)
+    assert math.isclose(result["geometry"]["coordinates"][1], 39.03)
+    assert result["properties"]["show_on_map"]
+
+    # switch back
+    fail2ban_map.ADD_RANDOM_OFFSET = flag
 
 
 def test_find_lat_lng_bad_ip(capsys):
@@ -184,6 +205,16 @@ def test_remove_non_existent(capsys):
 
     entry = data["features"][-1]
     assert entry["properties"]["name"] == TEST_IP_1
+
+    captured = capsys.readouterr()
+    assert f"File {TEMP_JSON_FILE} not found." in captured.err
+
+
+def test_remove_empty_file(capsys):
+    """remove() ignores an empty file."""
+    remove(TEST_IP_1, json_file=TEMP_JSON_FILE)
+
+    assert not os.path.exists(TEMP_JSON_FILE)
 
     captured = capsys.readouterr()
     assert f"File {TEMP_JSON_FILE} not found." in captured.err

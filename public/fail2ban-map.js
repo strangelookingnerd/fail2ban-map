@@ -23,6 +23,9 @@
  */
 
 window.onload = async function () {
+  // update title
+  document.title = document.title + " - " + globalThis.location.hostname;
+
   const map = L.map("map", {
     center: [30, 0],
     zoom: 3,

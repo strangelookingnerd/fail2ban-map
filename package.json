@@ -22,7 +22,7 @@
     "leaflet-canvas-markers": "1.0.7",
     "leaflet.heat": "0.2.0",
     "leaflet.layerscontrol-minimap": "1.0.21",
-    "leaflet-providers": "2.0.0"
+    "leaflet-providers": "3.0.0"
   },
   "devDependencies": {
     "jest": "30.2.0",

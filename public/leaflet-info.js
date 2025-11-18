@@ -85,10 +85,10 @@ L.Control.Info = L.Control.extend({
   },
 
   toggle: function (extend) {
-    this.infoTitle.style.display = !extend ? "" : "none";
+    this.infoTitle.style.display = extend ? "none" : "";
     this.infoContent.style.display = extend ? "" : "none";
     this.infoCloseButton.style.display = extend ? "" : "none";
-    this.infoContainer.style.cursor = !extend ? "pointer" : "";
+    this.infoContainer.style.cursor = extend ? "" : "pointer";
   },
 });
 

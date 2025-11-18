@@ -1,4 +1,4 @@
-# fail2ban-map 
+# fail2ban-map
 
 [![build](https://github.com/strangelookingnerd/fail2ban-map/actions/workflows/build.yml/badge.svg)](https://github.com/strangelookingnerd/fail2ban-map/actions/workflows/build.yml)
 [![codecov](https://codecov.io/gh/strangelookingnerd/fail2ban-map/graph/badge.svg?token=LKNIZWF5E8)](https://codecov.io/gh/strangelookingnerd/fail2ban-map)
@@ -43,19 +43,18 @@ fail2ban-map is a re-write of [fail2map](https://github.com/tachtler/fail2map) b
 
     ```bash
     nano /home/pi/fail2ban-map/script/fail2ban-map-action.conf
-    
     ```
 
     ```bash
     fail2ban-map = cd /home/pi/fail2ban-map/script && python fail2ban_map.py
     ```
 
-*  Create a symlink to `script/fail2ban-map-action.conf` in the fail2ban actions folder 
+* Create a symlink to `script/fail2ban-map-action.conf` in the fail2ban actions folder
 
-    ```bash
-    ln -s /home/pi/fail2ban-map/script/fail2ban-map-action.conf /etc/fail2ban/action.d/fail2ban-map-action.conf
-    ```
-    
+   ```bash
+   ln -s /home/pi/fail2ban-map/script/fail2ban-map-action.conf /etc/fail2ban/action.d/fail2ban-map-action.conf
+   ```
+
 * Add the action to your `jail.conf` or `jail.local`
 
     ```bash
@@ -64,9 +63,19 @@ fail2ban-map is a re-write of [fail2map](https://github.com/tachtler/fail2map) b
               fail2ban-map-action
     ```
 
-* (Optional) Change the tile provider in `public/fail2ban-map.js`
+* Host the `public/` directory on your favourite web server, e.g. `apache2` to access it
 
-    ```javascript
-    // list of tile providers can be seen here: https://leaflet-extras.github.io/leaflet-providers/preview/
-    L.tileLayer.provider("CartoDB.DarkMatterNoLabels").addTo(map);
+## Update
+
+* Pull latest changes from fail2ban-map repository
+
+    ```bash
+    cd /home/pi/fail2ban-map
+    git pull
+    ```
+* Install dependencies
+
+    ```bash
+    npm install
+    pip install -r requirements.txt
     ```

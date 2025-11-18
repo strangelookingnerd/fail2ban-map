@@ -26,6 +26,8 @@ import json
 import os
 import random
 import sys
+from typing import Any
+
 import requests
 
 JSON_FILE = os.path.dirname(os.path.realpath(__file__)) + "/../public/places.geojson"
@@ -94,7 +96,7 @@ def remove(ip_address: str, json_file=JSON_FILE) -> None:
         _save_json(data, json_file)
 
 
-def _load_json(json_file=JSON_FILE) -> json:
+def _load_json(json_file=JSON_FILE) -> Any:
     try:
         with open(json_file, "r", encoding="utf-8") as file:
             return json.load(file)

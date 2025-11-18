@@ -94,12 +94,20 @@ window.onload = async function () {
     },
   });
 
+  let data = {
+    type: "FeatureCollection",
+    features: [],
+  };
   try {
     const response = await fetch("places.geojson");
-    const data = await response.json();
-    const heatmapData = [];
+    data = await response.json();
+  } catch (error) {
+    console.error("Error loading GeoJSON:", error);
+  }
 
-    info.setContent(`
+  const heatmapData = [];
+
+  info.setContent(`
     <div title="fail2ban-map &copy; strangelookingnerd">
       <a class="github-fork-ribbon" target="_blank" href="https://github.com/strangelookingnerd/fail2ban-map" 
          data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
@@ -112,31 +120,28 @@ window.onload = async function () {
       </div>
     </div>`);
 
-    data.features.forEach((feature) => {
-      if (!feature.properties?.show_on_map) {
-        return;
-      }
+  for (const feature of data.features) {
+    if (!feature.properties?.show_on_map) {
+      continue;
+    }
 
-      L.canvasMarker(feature.geometry.coordinates.reverse(), {
-        renderer: markerLayer,
-        img: {
-          url: "./assets/img/marker.svg",
-          size: [24, 33],
-          offset: { x: 0, y: -16 },
-        },
+    L.canvasMarker(feature.geometry.coordinates.reverse(), {
+      renderer: markerLayer,
+      img: {
+        url: "./assets/img/marker.svg",
+        size: [24, 33],
+        offset: { x: 0, y: -16 },
+      },
+    })
+      .bindTooltip(feature.properties.place, {
+        offset: { x: 12, y: -20 },
       })
-        .bindTooltip(feature.properties.place, {
-          offset: { x: 12, y: -20 },
-        })
-        .addTo(map);
+      .addTo(map);
 
-      heatmapData.push(feature.geometry.coordinates);
-    });
-
-    heatmapLayer.setLatLngs(heatmapData);
-  } catch (error) {
-    console.error("Error loading GeoJSON:", error);
+    heatmapData.push(feature.geometry.coordinates);
   }
+
+  heatmapLayer.setLatLngs(heatmapData);
 
   L.control
     .layers({ Markers: markerLayer, Heatmap: heatmapLayer }, null, {

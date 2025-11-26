@@ -14,7 +14,7 @@ jobs:
       id-token: write
       pages: write
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Disable AppArmor # https://github.com/puppeteer/puppeteer/issues/12818
         run: echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
       - name: Use Node.js ${{ matrix.node-version }}

@@ -17,7 +17,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "7.1.0",
     "github-fork-ribbon-css": "0.2.3",
-    "jquery": "3.7.1",
+    "jquery": "4.0.0",
     "leaflet": "1.9.4",
     "leaflet-canvas-markers": "1.0.7",
     "leaflet.heat": "0.2.0",

@@ -112,7 +112,7 @@ window.onload = async function () {
       <a class="github-fork-ribbon" target="_blank" href="https://github.com/strangelookingnerd/fail2ban-map" 
          data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
       <div class="info-container">
-          <img src="./favicon.ico" alt="fail2ban-map icon">
+          <img src="./assets/favicon.ico" alt="fail2ban-map icon">
           <div class="banned-count">
             ${data.features.length} banned IP from<br />
             ${new Set(data.features.map((feature) => feature.properties.place.split(", ").pop())).size} different countries
@@ -128,7 +128,7 @@ window.onload = async function () {
     L.canvasMarker(feature.geometry.coordinates.reverse(), {
       renderer: markerLayer,
       img: {
-        url: "./assets/img/marker.svg",
+        url: "./assets/marker.svg",
         size: [24, 33],
         offset: { x: 0, y: -16 },
       },

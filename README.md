@@ -15,12 +15,14 @@
 
 ## What is this?
 
-![public/favicon.ico](public/favicon.ico)
+![public/assets/favicon.ico](public/assets/favicon.ico)
 
 fail2ban-map is a map generator for [fail2ban](http://www.fail2ban.org).
 It displays banned IP on a world map. Adding IP is done through a fail2ban *action* included in this repository.
 
 Check out the [demo](https://strangelookingnerd.github.io/fail2ban-map/).
+
+<img alt="screenshot" src="https://github.com/user-attachments/assets/6ab8cb2a-53c5-47b9-b6f2-52a94c40e4cf" />
 
 fail2ban-map is a re-write of [fail2map](https://github.com/tachtler/fail2map) by Manuel Vonthron and Klaus Tachtler.
 

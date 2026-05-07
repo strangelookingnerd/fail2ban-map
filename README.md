@@ -31,7 +31,7 @@ fail2ban-map is a re-write of [fail2map](https://github.com/tachtler/fail2map) b
 * Clone fail2ban-map to the desired location
 
     ```bash
-    git clone https://github.com/strangelookingnerd/fail2ban-map /home/pi
+    git clone https://github.com/strangelookingnerd/fail2ban-map /home/pi/fail2ban-map
     ```
 * Install dependencies
 

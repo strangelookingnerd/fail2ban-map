@@ -65,6 +65,12 @@ fail2ban-map is a re-write of [fail2map](https://github.com/tachtler/fail2map) b
               fail2ban-map-action
     ```
 
+* Copy `public/config.example.js` to `public/config.js` and set your [CARTO basemaps API key](https://carto.com/basemaps/apikey/)
+
+    ```bash
+    cp public/config.example.js public/config.js
+    ```
+
 * Host the `public/` directory on your favourite web server, e.g. `apache2` to access it
 
 ## Update

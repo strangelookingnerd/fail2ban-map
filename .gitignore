@@ -2,5 +2,6 @@
 /node_modules
 /public/vendor
 /public/places.geojson
+/public/config.js
 /package-lock.json
 /*.iml

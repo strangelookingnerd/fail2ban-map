@@ -1,7 +1,7 @@
 /**
  * MIT License
  *
- * Copyright (c) 2025 strangelookingnerd
+ * Copyright (c) 2026 strangelookingnerd
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -35,27 +35,25 @@ window.onload = async function () {
   });
 
   // list of tile providers can be seen here: https://leaflet-extras.github.io/leaflet-providers/preview/
+  // CARTO expects ?key=...; Leaflet fills {apiKey} from the tileLayer options.
+  const cartoApiKey = globalThis.FAIL2BAN_MAP_CONFIG?.cartoApiKey ?? "";
+  const cartoAttribution =
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+  const cartoLayer = (style) =>
+    L.tileLayer(`https://{s}.basemaps.cartocdn.com/${style}/{z}/{x}/{y}{r}.png?key={apiKey}`, {
+      apiKey: cartoApiKey,
+      attribution: cartoAttribution,
+    });
+
   const selections = {
-    "OpenStreetMap.Mapnik": L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    "OpenStreetMap.Mapnik": L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
         '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     }),
-    "CartoDB.Positron": L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    }),
-    "CartoDB.PositronNoLabels": L.tileLayer("https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    }),
-    "CartoDB.DarkMatter": L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    }),
-    "CartoDB.DarkMatterNoLabels": L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    }),
+    "CartoDB.Positron": cartoLayer("light_all"),
+    "CartoDB.PositronNoLabels": cartoLayer("light_nolabels"),
+    "CartoDB.DarkMatter": cartoLayer("dark_all"),
+    "CartoDB.DarkMatterNoLabels": cartoLayer("dark_nolabels"),
   };
 
   L.control.layers

@@ -112,8 +112,7 @@ def _save_json(data: str, json_file=JSON_FILE) -> None:
     try:
         with open(json_file, "w", encoding="utf-8") as file:
             json.dump(data, file)
-    # pylint: disable=broad-exception-caught
-    except Exception as ex:
+    except Exception as ex: # pylint: disable=broad-exception-caught
         print(f"Error writing to {json_file}: {ex}", file=sys.stderr)
 
 

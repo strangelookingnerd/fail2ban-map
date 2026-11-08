@@ -65,6 +65,9 @@ jobs:
               time.sleep(1.5) # Ratelimit 45 request / minute
               os.system(f'python ./script/fail2ban_map.py add {ip}')
           "
+      - name: Create example deployment config
+        if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+        run: cp ./public/config.example.js ./public/config.js
       - name: Configure Pages
         if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         uses: actions/configure-pages@v6

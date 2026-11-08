@@ -65,7 +65,7 @@ fail2ban-map is a re-write of [fail2map](https://github.com/tachtler/fail2map) b
               fail2ban-map-action
     ```
 
-* Copy `public/config.example.js` to `public/config.js` and set your [CARTO basemaps API key](https://carto.com/basemaps/apikey/)
+* Copy `public/config.example.js` to `public/config.js`. The example defaults to OpenStreetMap.Mapnik; set a [CARTO basemaps API key](https://carto.com/basemaps/apikey/) to enable the CARTO layers.
 
     ```bash
     cp public/config.example.js public/config.js

@@ -63,7 +63,8 @@ window.onload = async function () {
     .setPosition("bottomright")
     .addTo(map);
 
-  selections["CartoDB.DarkMatterNoLabels"].addTo(map);
+  const defaultBaseLayer = globalThis.FAIL2BAN_MAP_CONFIG?.defaultBaseLayer ?? "CartoDB.DarkMatterNoLabels";
+  (selections[defaultBaseLayer] ?? selections["CartoDB.DarkMatterNoLabels"]).addTo(map);
 
   const info = L.control
     .info({

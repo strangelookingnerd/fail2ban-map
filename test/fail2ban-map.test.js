@@ -44,4 +44,9 @@ describe("Page Loading Test", () => {
     const classList = await page.$eval("#map", (el) => el.classList.value);
     expect(classList).toContain("leaflet-container")
   });
+
+  test("Check if the heatmap plugin is loaded", async () => {
+    const heatLayerAvailable = await page.evaluate(() => typeof L.heatLayer === "function");
+    expect(heatLayerAvailable).toBe(true);
+  });
 });

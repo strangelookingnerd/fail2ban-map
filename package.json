@@ -70,8 +70,8 @@
       "to": "public/vendor/leaflet-canvas-markers/leaflet-canvas-markers.js"
     },
     {
-      "from": "node_modules/leaflet.heat/dist/leaflet-heat.js",
-      "to": "public/vendor/leaflet.heat/leaflet-heat.js"
+      "from": "node_modules/leaflet.heat/dist/leaflet-heat-global.js",
+      "to": "public/vendor/leaflet.heat/leaflet-heat-global.js"
     },
     {
       "from": "node_modules/leaflet.layerscontrol-minimap/control.layers.minimap.css",
